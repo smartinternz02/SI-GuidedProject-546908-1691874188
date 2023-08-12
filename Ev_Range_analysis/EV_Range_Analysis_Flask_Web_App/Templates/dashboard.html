@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tableau Integration</title>
+    <script
+      type="text/javascript"
+      src="https://public.tableau.com/javascripts/api/tableau-2.min.js"
+    ></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .container1 {
+        height: 885px;
+        width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .explosive-item {
+        display: inline-block;
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #000;
+        animation-fill-mode: forwards;
+        cursor: pointer;
+      }
+      .explosive-item:hover {
+        animation: ease-in-out;
+        transform: scale(1.5);
+        opacity: 5;
+      }
+
+      h2 {
+        margin-top: 1.5rem;
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      .tableau-viz {
+        height: 1000px;
+        margin-top: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      /* Additional styles for a more interactive appearance */
+      .container:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease-in-out;
+      }
+      .container1:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Electric Vehicle Range Analysis</h1>
+    </header>
+    <div class="container">
+      <h2>Tableau Story</h2>
+      <div class="tableau-viz" id="tableauVizStory"></div>
+    </div>
+    <div class="container1">
+      <h2>Tableau Dashboard 1</h2>
+      <div class="tableau-viz" id="tableauVizDashboard1"></div>
+    </div>
+    <div class="container1">
+      <h2>Tableau Dashboard 2</h2>
+      <div class="tableau-viz" id="tableauVizDashboard2"></div>
+    </div>
+    <script type="text/javascript">
+      function initStory() {
+        var options = {
+          hideTabs: true,
+          hideToolbar: true,
+          onFirstInteractive: function () {
+            console.log("Tableau story has loaded.");
+            initDashboard1();
+          },
+        };
+
+        var containerDivStory = document.getElementById("tableauVizStory");
+        var urlStory = "{{ tableau_story_url }}"; // URL of the Tableau story
+        var vizStory = new tableau.Viz(containerDivStory, urlStory, options);
+      }
+
+      function initDashboard1() {
+        var options = {
+          hideTabs: true,
+          hideToolbar: true,
+          onFirstInteractive: function () {
+            console.log("Tableau dashboard 1 has loaded.");
+            initDashboard2();
+          },
+        };
+
+        var containerDivDashboard1 = document.getElementById(
+          "tableauVizDashboard1"
+        );
+        var urlDashboard1 = "{{ tableau_dashboard_url_1 }}"; // URL of the first Tableau dashboard
+        var vizDashboard1 = new tableau.Viz(
+          containerDivDashboard1,
+          urlDashboard1,
+          options
+        );
+      }
+
+      function initDashboard2() {
+        var options = {
+          hideTabs: true,
+          hideToolbar: true,
+          onFirstInteractive: function () {
+            console.log("Tableau dashboard 2 has loaded.");
+          },
+        };
+
+        var containerDivDashboard2 = document.getElementById(
+          "tableauVizDashboard2"
+        );
+        var urlDashboard2 = "{{ tableau_dashboard_url_2 }}"; // URL of the second Tableau dashboard
+        var vizDashboard2 = new tableau.Viz(
+          containerDivDashboard2,
+          urlDashboard2,
+          options
+        );
+      }
+
+      document.addEventListener("DOMContentLoaded", initStory);
+    </script>
+    <div class="container">
+      <ol>
+        <lh>This project is done by</lh>
+        <br />
+        <li class="explosive-item">Naveen Gowtham.K.T</li>
+        <br />
+        <li class="explosive-item">Sudha.P</li>
+        <br />
+        <li class="explosive-item">Shalini.K</li>
+      </ol>
+    </div>
+  </body>
+</html>
